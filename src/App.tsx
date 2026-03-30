@@ -85,16 +85,17 @@ const Navbar = () => (
    ============================ */
 
 const HeroSection = () => (
-  <section id="home" className="relative w-full h-screen flex flex-col items-center justify-center overflow-hidden">
+  <section id="home" className="relative w-full min-h-[100dvh] flex items-center justify-center overflow-hidden">
     <video
       autoPlay loop muted playsInline
       className="absolute inset-0 w-full h-full object-cover z-[1]"
       style={{ mixBlendMode: "screen", opacity: 0.65 }}
       src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260325_120549_0cd82c36-56b3-4dd9-b190-069cfc3a623f.mp4"
     />
+    <div className="absolute inset-0 bg-black/20 z-[1] pointer-events-none" />
     <div className="absolute inset-x-0 bottom-0 h-64 bg-gradient-to-t from-background to-transparent z-[2] pointer-events-none" />
 
-    <div className="relative z-10 pt-24 md:pt-32 flex flex-col items-center text-center px-5 md:px-4 max-w-4xl mx-auto w-full">
+    <div className="relative z-10 flex flex-col items-center justify-center text-center px-6 pt-24 pb-12 w-full max-w-4xl mx-auto">
       <motion.div {...fadeUp(0)} className="flex items-center gap-2 md:gap-3 mb-6 md:mb-8 flex-wrap justify-center">
         <div className="flex items-center gap-1.5">
           <span className="text-base md:text-lg">🪐</span>
