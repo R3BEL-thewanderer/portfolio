@@ -291,7 +291,7 @@ const TechStackSection = () => (
    ABOUT / MISSION SECTION
    ============================ */
 
-const WordReveal = ({ children, progress, range }: { children: string; progress: MotionValue<number>; range: [number, number] }) => {
+const WordReveal = ({ children, progress, range }: { children: React.ReactNode; progress: MotionValue<number>; range: [number, number] }) => {
   const opacity = useTransform(progress, range, [0.15, 1]);
   return <motion.span style={{ opacity }} className="mr-2 inline-block lg:mr-3">{children}</motion.span>;
 };
