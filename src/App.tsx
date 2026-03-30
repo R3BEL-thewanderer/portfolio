@@ -52,8 +52,8 @@ const Logo = () => (
 );
 
 const Navbar = () => (
-  <nav className="fixed top-0 inset-x-0 z-50 flex items-center justify-between px-4 md:px-28 py-3 md:py-4 bg-transparent">
-    <div className="flex items-center gap-12">
+  <nav className="fixed top-0 inset-x-0 z-50 flex items-center justify-between px-3 md:px-28 py-3 md:py-4 bg-transparent overflow-hidden">
+    <div className="flex items-center gap-12 flex-shrink-0">
       <Logo />
       <div className="hidden md:flex items-center gap-4 text-sm font-heading font-medium text-muted-foreground">
         {["Home", "Projects", "Skills", "About", "Experience", "Contact"].map((item, i, arr) => (
@@ -66,14 +66,14 @@ const Navbar = () => (
         ))}
       </div>
     </div>
-    <div className="flex items-center gap-2 md:gap-3">
+    <div className="flex items-center gap-2 md:gap-3 flex-shrink-0">
       <a href="https://github.com/R3BEL-thewanderer" target="_blank" rel="noreferrer" className="liquid-glass w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center text-foreground hover:scale-105 transition-transform">
         <Github className="w-3.5 h-3.5 md:w-4 md:h-4" />
       </a>
       <a href="https://linkedin.com/in/ashish-singh-209291369" target="_blank" rel="noreferrer" className="liquid-glass w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center text-foreground hover:scale-105 transition-transform">
         <Linkedin className="w-3.5 h-3.5 md:w-4 md:h-4" />
       </a>
-      <a href="mailto:ashishhsingh4444@gmail.com" className="liquid-glass w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center text-foreground hover:scale-105 transition-transform">
+      <a href="mailto:ashishhsingh4444@gmail.com" className="hidden sm:flex liquid-glass w-8 h-8 md:w-10 md:h-10 rounded-full items-center justify-center text-foreground hover:scale-105 transition-transform">
         <Mail className="w-3.5 h-3.5 md:w-4 md:h-4" />
       </a>
     </div>
@@ -498,14 +498,6 @@ const CTASection = () => {
           </motion.button>
         </motion.form>
 
-        <motion.div {...fadeUp(0.4)} className="flex flex-col sm:flex-row items-center gap-4 mt-8">
-          <a href="mailto:ashishhsingh4444@gmail.com" className="liquid-glass text-foreground font-heading font-bold rounded-lg px-8 py-3.5 hover:scale-105 transition-transform text-sm tracking-[0.05em] text-center">
-            Email Me
-          </a>
-          <a href="https://linkedin.com/in/ashish-singh-209291369" target="_blank" rel="noreferrer" className="liquid-glass text-foreground font-heading font-bold rounded-lg px-8 py-3.5 hover:scale-105 transition-transform text-sm tracking-[0.05em] text-center">
-            View LinkedIn
-          </a>
-        </motion.div>
       </div>
     </section>
   );
