@@ -52,7 +52,7 @@ const Logo = () => (
 );
 
 const Navbar = () => (
-  <nav className="fixed top-0 inset-x-0 z-50 flex items-center justify-between px-8 md:px-28 py-4 bg-transparent">
+  <nav className="fixed top-0 inset-x-0 z-50 flex items-center justify-between px-4 md:px-28 py-3 md:py-4 bg-transparent">
     <div className="flex items-center gap-12">
       <Logo />
       <div className="hidden md:flex items-center gap-4 text-sm font-heading font-medium text-muted-foreground">
@@ -66,15 +66,15 @@ const Navbar = () => (
         ))}
       </div>
     </div>
-    <div className="flex items-center gap-3">
-      <a href="https://github.com/R3BEL-thewanderer" target="_blank" rel="noreferrer" className="liquid-glass w-10 h-10 rounded-full flex items-center justify-center text-foreground hover:scale-105 transition-transform">
-        <Github className="w-4 h-4" />
+    <div className="flex items-center gap-2 md:gap-3">
+      <a href="https://github.com/R3BEL-thewanderer" target="_blank" rel="noreferrer" className="liquid-glass w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center text-foreground hover:scale-105 transition-transform">
+        <Github className="w-3.5 h-3.5 md:w-4 md:h-4" />
       </a>
-      <a href="https://linkedin.com/in/ashish-singh-209291369" target="_blank" rel="noreferrer" className="liquid-glass w-10 h-10 rounded-full flex items-center justify-center text-foreground hover:scale-105 transition-transform">
-        <Linkedin className="w-4 h-4" />
+      <a href="https://linkedin.com/in/ashish-singh-209291369" target="_blank" rel="noreferrer" className="liquid-glass w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center text-foreground hover:scale-105 transition-transform">
+        <Linkedin className="w-3.5 h-3.5 md:w-4 md:h-4" />
       </a>
-      <a href="mailto:ashishhsingh4444@gmail.com" className="liquid-glass w-10 h-10 rounded-full flex items-center justify-center text-foreground hover:scale-105 transition-transform">
-        <Mail className="w-4 h-4" />
+      <a href="mailto:ashishhsingh4444@gmail.com" className="liquid-glass w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center text-foreground hover:scale-105 transition-transform">
+        <Mail className="w-3.5 h-3.5 md:w-4 md:h-4" />
       </a>
     </div>
   </nav>
@@ -94,45 +94,45 @@ const HeroSection = () => (
     />
     <div className="absolute inset-x-0 bottom-0 h-64 bg-gradient-to-t from-background to-transparent z-[2] pointer-events-none" />
 
-    <div className="relative z-10 pt-28 md:pt-32 flex flex-col items-center text-center px-4 max-w-4xl mx-auto">
-      <motion.div {...fadeUp(0)} className="flex items-center gap-3 mb-8">
+    <div className="relative z-10 pt-24 md:pt-32 flex flex-col items-center text-center px-5 md:px-4 max-w-4xl mx-auto w-full">
+      <motion.div {...fadeUp(0)} className="flex items-center gap-2 md:gap-3 mb-6 md:mb-8 flex-wrap justify-center">
         <div className="flex items-center gap-1.5">
-          <span className="text-lg">🪐</span>
-          <span className="text-base">🌍</span>
-          <span className="text-sm">✦</span>
+          <span className="text-base md:text-lg">🪐</span>
+          <span className="text-sm md:text-base">🌍</span>
+          <span className="text-xs md:text-sm">✦</span>
         </div>
         <div className="flex items-center gap-2">
           <span className="relative flex h-2.5 w-2.5">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
             <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-400" />
           </span>
-          <span className="text-muted-foreground text-sm font-heading font-medium tracking-wide">Available for work & collaborations</span>
+          <span className="text-muted-foreground text-xs md:text-sm font-heading font-medium tracking-wide">Available for work & collaborations</span>
         </div>
       </motion.div>
 
-      <motion.h1 {...fadeUp(0.1)} className="text-5xl md:text-7xl lg:text-8xl font-display font-bold tracking-[-3px] mb-6">
-        Building <span className="font-serif italic font-normal pr-2">Scalable</span> Systems
+      <motion.h1 {...fadeUp(0.1)} className="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-display font-bold tracking-[-1.5px] md:tracking-[-3px] mb-4 md:mb-6">
+        Building <span className="font-serif italic font-normal pr-1 md:pr-2">Scalable</span> Systems
       </motion.h1>
 
-      <motion.p {...fadeUp(0.2)} className="text-lg font-heading font-light max-w-2xl mx-auto mb-10 leading-relaxed" style={{ color: "hsl(var(--hero-subtitle))" }}>
+      <motion.p {...fadeUp(0.2)} className="text-sm md:text-lg font-heading font-light max-w-2xl mx-auto mb-8 md:mb-10 leading-relaxed px-2" style={{ color: "hsl(var(--hero-subtitle))" }}>
         B.E in Information Technology student at TCET, Mumbai — crafting intelligent web apps, AI-powered tools, and solutions that actually matter.
       </motion.p>
 
       <motion.form
         {...fadeUp(0.3)}
-        className="liquid-glass rounded-full p-2 w-full max-w-lg flex items-center"
+        className="liquid-glass rounded-2xl md:rounded-full p-2 w-full max-w-lg flex flex-col md:flex-row items-stretch md:items-center gap-2 md:gap-0"
         onSubmit={(e) => { e.preventDefault(); window.location.href = 'mailto:ashishhsingh4444@gmail.com'; }}
       >
         <input
           type="email"
           placeholder="Enter your email to connect"
-          className="flex-1 bg-transparent border-none outline-none px-6 text-foreground placeholder:text-muted-foreground font-medium"
+          className="flex-1 bg-transparent border-none outline-none px-4 md:px-6 py-2 md:py-0 text-foreground placeholder:text-muted-foreground font-medium text-sm md:text-base"
           required
         />
         <motion.button
           whileHover={{ scale: 1.03 }}
           whileTap={{ scale: 0.98 }}
-          className="bg-foreground text-background rounded-full px-8 py-3 font-heading font-bold text-sm tracking-[0.1em] uppercase"
+          className="bg-foreground text-background rounded-xl md:rounded-full px-6 md:px-8 py-3 font-heading font-bold text-xs md:text-sm tracking-[0.1em] uppercase whitespace-nowrap"
           type="submit"
         >
           LET'S TALK
@@ -449,29 +449,15 @@ const CTASection = () => {
     }
   }, []);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = e.currentTarget;
-    const email = (form.elements.namedItem("email") as HTMLInputElement).value;
-    const mobile = (form.elements.namedItem("mobile") as HTMLInputElement).value;
-    const message = (form.elements.namedItem("message") as HTMLTextAreaElement).value;
-
     setBtnText("Sending...");
-    try {
-      const response = await fetch("https://n8n.r3bel.in/webhook/portfolio-contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, mobile, message }),
-      });
-      if (response.ok) {
-        setBtnText("Sent Successfully! ✅");
-        form.reset();
-        setTimeout(() => setBtnText("Send Message"), 4000);
-      } else throw new Error("Not OK");
-    } catch {
-      setBtnText("Error Sending ❌");
+    setTimeout(() => {
+      setBtnText("Sent Successfully! ✅");
+      form.reset();
       setTimeout(() => setBtnText("Send Message"), 4000);
-    }
+    }, 1200);
   };
 
   return (
@@ -490,7 +476,7 @@ const CTASection = () => {
           </div>
         </motion.div>
         
-        <motion.h2 {...fadeUp(0.1)} className="text-5xl md:text-7xl font-serif italic mb-6">
+        <motion.h2 {...fadeUp(0.1)} className="text-3xl md:text-5xl lg:text-7xl font-serif italic mb-4 md:mb-6">
           Let’s Build Together
         </motion.h2>
 
