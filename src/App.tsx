@@ -52,8 +52,8 @@ const Logo = () => (
 );
 
 const Navbar = () => (
-  <nav className="fixed top-0 inset-x-0 z-50 flex items-center justify-between px-3 md:px-28 py-3 md:py-4 bg-transparent overflow-hidden">
-    <div className="flex items-center gap-12 flex-shrink-0">
+  <nav className="fixed top-0 left-0 w-screen z-50 flex items-center justify-between px-4 py-3 md:px-28 md:py-4 bg-transparent">
+    <div className="flex items-center gap-12 shrink-0">
       <Logo />
       <div className="hidden md:flex items-center gap-4 text-sm font-heading font-medium text-muted-foreground">
         {["Home", "Projects", "Skills", "About", "Experience", "Contact"].map((item, i, arr) => (
@@ -66,15 +66,15 @@ const Navbar = () => (
         ))}
       </div>
     </div>
-    <div className="flex items-center gap-2 md:gap-3 flex-shrink-0">
-      <a href="https://github.com/R3BEL-thewanderer" target="_blank" rel="noreferrer" className="liquid-glass w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center text-foreground hover:scale-105 transition-transform">
-        <Github className="w-3.5 h-3.5 md:w-4 md:h-4" />
+    <div className="flex items-center gap-2 md:gap-3 shrink-0">
+      <a href="https://github.com/R3BEL-thewanderer" target="_blank" rel="noreferrer" className="liquid-glass w-7 h-7 md:w-10 md:h-10 rounded-full flex items-center justify-center text-foreground hover:scale-105 transition-transform">
+        <Github size={16} className="md:w-4 md:h-4" />
       </a>
-      <a href="https://linkedin.com/in/ashish-singh-209291369" target="_blank" rel="noreferrer" className="liquid-glass w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center text-foreground hover:scale-105 transition-transform">
-        <Linkedin className="w-3.5 h-3.5 md:w-4 md:h-4" />
+      <a href="https://linkedin.com/in/ashish-singh-209291369" target="_blank" rel="noreferrer" className="liquid-glass w-7 h-7 md:w-10 md:h-10 rounded-full flex items-center justify-center text-foreground hover:scale-105 transition-transform">
+        <Linkedin size={16} className="md:w-4 md:h-4" />
       </a>
-      <a href="mailto:ashishhsingh4444@gmail.com" className="hidden sm:flex liquid-glass w-8 h-8 md:w-10 md:h-10 rounded-full items-center justify-center text-foreground hover:scale-105 transition-transform">
-        <Mail className="w-3.5 h-3.5 md:w-4 md:h-4" />
+      <a href="mailto:ashishhsingh4444@gmail.com" className="liquid-glass w-7 h-7 md:w-10 md:h-10 rounded-full flex items-center justify-center text-foreground hover:scale-105 transition-transform">
+        <Mail size={16} className="md:w-4 md:h-4" />
       </a>
     </div>
   </nav>
