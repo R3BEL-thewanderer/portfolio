@@ -1,0 +1,240 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 0%;
+    --foreground: 0 0% 100%;
+    
+    --card: 0 0% 5%;
+    --card-foreground: 0 0% 100%;
+    
+    --primary: 0 0% 100%;
+    --primary-foreground: 0 0% 0%;
+    
+    --secondary: 0 0% 12%;
+    --secondary-foreground: 0 0% 85%;
+    
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 65%;
+    
+    --accent: 260 40% 50%;
+    --accent-foreground: 0 0% 100%;
+    
+    --border: 0 0% 20%;
+    --input: 0 0% 18%;
+    --ring: 0 0% 40%;
+    
+    --hero-subtitle: 210 17% 95%;
+
+    --nebula-purple: rgba(120, 60, 200, 0.08);
+    --nebula-blue: rgba(50, 80, 220, 0.06);
+    --nebula-teal: rgba(40, 180, 160, 0.04);
+  }
+
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    scroll-behavior: smooth;
+  }
+}
+
+/* ============================
+   STAR FIELD & NEBULA
+   Handled by Three.js GalaxyCanvas component
+   ============================ */
+
+/* ============================
+   LIQUID GLASS (enhanced galaxy-tint)
+   ============================ */
+
+@layer utilities {
+  .liquid-glass {
+    background: rgba(255, 255, 255, 0.02);
+    background-blend-mode: luminosity;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: none;
+    box-shadow:
+      inset 0 1px 1px rgba(255, 255, 255, 0.1),
+      0 0 20px rgba(120, 60, 200, 0.03);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .liquid-glass::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1.4px;
+    background: linear-gradient(180deg,
+      rgba(180,200,255,0.4) 0%, rgba(150,140,220,0.15) 20%,
+      rgba(255,255,255,0) 40%, rgba(255,255,255,0) 60%,
+      rgba(150,140,220,0.15) 80%, rgba(180,200,255,0.4) 100%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  .glass-card {
+    background: rgba(255, 255, 255, 0.025);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(180, 200, 255, 0.1);
+    box-shadow:
+      0 4px 30px rgba(0, 0, 0, 0.2),
+      0 0 40px rgba(120, 60, 200, 0.05),
+      inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    transition: border-color 0.4s, transform 0.4s, box-shadow 0.4s;
+  }
+
+  .glass-card:hover {
+    border-color: rgba(180, 200, 255, 0.25);
+    transform: translateY(-6px);
+    box-shadow:
+      0 16px 48px rgba(120, 60, 200, 0.12),
+      0 0 80px rgba(80, 120, 220, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+
+  .gradient-label {
+    background: linear-gradient(135deg, rgba(180,200,255,0.9), rgba(200,160,255,0.8));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    font-weight: 600;
+  }
+}
+
+/* ============================
+   ROTATING ORBITS
+   ============================ */
+
+.orbit-container {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  margin: 0 auto;
+}
+
+.orbit-ring {
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(180, 200, 255, 0.08);
+  border-radius: 50%;
+  animation: orbit-spin 30s linear infinite;
+}
+
+.orbit-ring-2 {
+  inset: 30px;
+  border-color: rgba(150, 140, 220, 0.1);
+  animation: orbit-spin-reverse 45s linear infinite;
+}
+
+.orbit-ring-3 {
+  inset: 70px;
+  border-color: rgba(100, 180, 220, 0.12);
+  animation: orbit-spin 60s linear infinite;
+}
+
+.orbit-dot {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(180, 200, 255, 0.6);
+  box-shadow: 0 0 8px rgba(180, 200, 255, 0.4);
+  top: -3px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.orbit-dot-2 {
+  width: 4px;
+  height: 4px;
+  top: auto;
+  bottom: -2px;
+  background: rgba(200, 180, 255, 0.5);
+  box-shadow: 0 0 6px rgba(200, 180, 255, 0.3);
+}
+
+.orbit-dot-3 {
+  width: 5px;
+  height: 5px;
+  top: 50%;
+  left: -2.5px;
+  transform: translateY(-50%);
+  background: rgba(150, 220, 255, 0.5);
+  box-shadow: 0 0 8px rgba(150, 220, 255, 0.3);
+}
+
+@keyframes orbit-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes orbit-spin-reverse {
+  from { transform: rotate(360deg); }
+  to   { transform: rotate(0deg); }
+}
+
+/* ============================
+   SKILL TAG STYLING
+   ============================ */
+
+.skill-tag {
+  padding: 6px 16px;
+  border-radius: 9999px;
+  font-size: 0.8rem;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(180, 200, 255, 0.12);
+  color: rgba(255, 255, 255, 0.7);
+  transition: all 0.3s ease;
+  backdrop-filter: blur(8px);
+  cursor: default;
+}
+
+.skill-tag:hover {
+  background: rgba(120, 60, 200, 0.15);
+  color: rgba(220, 200, 255, 1);
+  border-color: rgba(150, 140, 220, 0.4);
+  box-shadow: 0 0 12px rgba(120, 60, 200, 0.1);
+  transform: translateY(-1px);
+}
+
+/* ============================
+   FORM STYLES
+   ============================ */
+
+.form-input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 14px 20px;
+  border-radius: 12px;
+  border: 1px solid rgba(180, 200, 255, 0.1);
+  background: rgba(255, 255, 255, 0.02);
+  color: hsl(var(--foreground));
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.form-input::placeholder {
+  color: hsl(var(--muted-foreground));
+  opacity: 0.6;
+}
+
+.form-input:focus {
+  border-color: rgba(150, 140, 220, 0.4);
+  box-shadow: 0 0 0 4px rgba(120, 60, 200, 0.08);
+}
