@@ -1,8 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, lazy, Suspense } from "react";
 import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
 import { Github, Linkedin, Mail } from "lucide-react";
 import Hls from "hls.js";
-import GalaxyCanvas from "./components/GalaxyCanvas";
+
+// Lazy load Three.js galaxy to reduce initial bundle & unblock main thread
+const GalaxyCanvas = lazy(() => import("./components/GalaxyCanvas"));
 
 const fadeUp = (delay: number = 0) => ({
   initial: { opacity: 0, y: 20 },
@@ -213,6 +215,7 @@ const ProjectCard = ({ project, delay }: { project: typeof projects[0]; delay: n
       <img
         src={project.image}
         alt={project.name}
+        loading="lazy"
         className="w-full h-full opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"
         style={{ objectFit: project.imageFit }}
       />
@@ -328,15 +331,19 @@ const MissionSection = () => {
           <img
             src="/img/ashish_singh.jpeg"
             alt="Ashish Singh"
+            loading="lazy"
             className="w-full h-full object-cover rounded-full"
           />
         </motion.div>
         {/* About Video */}
         <motion.div {...fadeUp(0.1)} className="w-full max-w-[700px] aspect-video rounded-3xl overflow-hidden">
           <video
-            autoPlay loop muted playsInline
+            loop muted playsInline
             className="w-full h-full object-cover"
-            src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260325_132944_a0d124bb-eaa1-4082-aa30-2310efb42b4b.mp4"
+            preload="none"
+            poster=""
+            onMouseEnter={(e) => e.currentTarget.play()}
+            ref={(el) => { if (el) { const obs = new IntersectionObserver(([entry]) => { if (entry.isIntersecting) { el.src = 'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260325_132944_a0d124bb-eaa1-4082-aa30-2310efb42b4b.mp4'; el.play().catch(()=>{}); obs.disconnect(); } }, { rootMargin: '200px' }); obs.observe(el); } }}
           />
         </motion.div>
       </div>
@@ -411,9 +418,10 @@ const SolutionSection = () => {
 
       <motion.div {...fadeUp(0.2)} className="w-full aspect-[3/1] rounded-2xl overflow-hidden mb-20">
         <video
-          autoPlay loop muted playsInline
+          loop muted playsInline
           className="w-full h-full object-cover"
-          src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260325_125119_8e5ae31c-0021-4396-bc08-f7aebeb877a2.mp4"
+          preload="none"
+          ref={(el) => { if (el) { const obs = new IntersectionObserver(([entry]) => { if (entry.isIntersecting) { el.src = 'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260325_125119_8e5ae31c-0021-4396-bc08-f7aebeb877a2.mp4'; el.play().catch(()=>{}); obs.disconnect(); } }, { rootMargin: '200px' }); obs.observe(el); } }}
         />
       </motion.div>
 
@@ -535,8 +543,10 @@ const Footer = () => (
 export default function App() {
   return (
     <div className="min-h-screen font-sans overflow-x-hidden w-full">
-      {/* 3D Galaxy Canvas — fixed behind entire page */}
-      <GalaxyCanvas />
+      {/* 3D Galaxy Canvas — lazy loaded to unblock main thread */}
+      <Suspense fallback={<div style={{ position: 'fixed', inset: 0, background: '#000', zIndex: 0 }} />}>
+        <GalaxyCanvas />
+      </Suspense>
       <Navbar />
       <main className="relative z-10">
         <HeroSection />

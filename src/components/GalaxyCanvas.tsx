@@ -9,6 +9,7 @@ export default function GalaxyCanvas() {
     if (!mount) return;
 
     // ── Scene Setup ──────────────────────────────────────────
+    const isMobile = window.innerWidth < 768;
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(
       75,
@@ -21,14 +22,14 @@ export default function GalaxyCanvas() {
     const renderer = new THREE.WebGLRenderer({
       canvas: mount,
       alpha: true,
-      antialias: true,
+      antialias: !isMobile,
     });
     renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1.5 : 2));
     renderer.setClearColor(0x000000, 1);
 
     // ── Galaxy Particles ──────────────────────────────────────
-    const STAR_COUNT = 8000;
+    const STAR_COUNT = isMobile ? 3000 : 6000;
     const geometry = new THREE.BufferGeometry();
     const positions = new Float32Array(STAR_COUNT * 3);
     const colors = new Float32Array(STAR_COUNT * 3);
@@ -87,7 +88,7 @@ export default function GalaxyCanvas() {
     scene.add(stars);
 
     // ── Nebula / Dust Clouds ──────────────────────────────────
-    const nebulaCount = 1200;
+    const nebulaCount = isMobile ? 400 : 800;
     const nebulaGeo = new THREE.BufferGeometry();
     const nebulaPos = new Float32Array(nebulaCount * 3);
     const nebulaCol = new Float32Array(nebulaCount * 3);
