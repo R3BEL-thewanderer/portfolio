@@ -52,7 +52,7 @@ const Logo = () => (
 );
 
 const Navbar = () => (
-  <nav className="fixed top-0 left-0 w-screen z-50 flex items-center justify-between px-4 py-3 md:px-28 md:py-4 bg-transparent">
+  <nav className="fixed top-0 left-0 w-full z-50 flex items-center justify-between px-4 py-3 md:px-28 md:py-4 bg-transparent">
     <div className="flex items-center gap-12 shrink-0">
       <Logo />
       <div className="hidden md:flex items-center gap-4 text-sm font-heading font-medium text-muted-foreground">
@@ -534,7 +534,7 @@ const Footer = () => (
 
 export default function App() {
   return (
-    <div className="min-h-screen font-sans">
+    <div className="min-h-screen font-sans overflow-x-hidden w-full">
       {/* 3D Galaxy Canvas — fixed behind entire page */}
       <GalaxyCanvas />
       <Navbar />
