@@ -265,12 +265,12 @@ const ProjectsSection = () => (
    ============================ */
 
 const skills = [
-  { icon: "⚛️", name: "Frontend", tags: ["HTML", "CSS", "Framer Motion"] },
-  { icon: "🖥️", name: "Backend", tags: ["JavaScript", "n8n"] },
-  { icon: "🗄️", name: "Database", tags: ["MongoDB", "PostgreSQL", "Firebase", "Supabase", "Redis"] },
-  { icon: "🤖", name: "AI & Automation", tags: ["LangChain", "OpenAI API", "Gemini", "n8n", "AI Agents", "RAG"] },
-  { icon: "☁️", name: "Cloud & DevOps", tags: ["GCP", "Docker", "Vercel", "Git"] },
-  { icon: "🎨", name: "Creative & Tools", tags: ["Figma", "Vite", "VS Code", "Postman", "Notion", "Cursor"] },
+  { icon: "⚛️", name: "Frontend", tags: ["React 19", "Next.js 15", "TypeScript", "Tailwind CSS", "Framer Motion", "Radix UI", "shadcn/ui", "HTML", "CSS"] },
+  { icon: "🖥️", name: "Backend", tags: ["Node.js", "Express.js", "FastAPI", "Python", "REST APIs", "JWT", "Zod"] },
+  { icon: "🗄️", name: "Database", tags: ["MongoDB", "Mongoose", "PostgreSQL", "Supabase", "Firebase", "Redis"] },
+  { icon: "🤖", name: "AI & Automation", tags: ["Vertex AI", "Gemini", "OpenAI API", "LangChain", "n8n", "AI Agents", "RAG"] },
+  { icon: "☁️", name: "Cloud & DevOps", tags: ["GCP", "Cloud Run", "Cloud Build", "Docker", "Vercel", "Render", "Git", "GitHub Actions"] },
+  { icon: "🎨", name: "UI & Tools", tags: ["Figma", "Vite", "Recharts", "React Query", "SWR", "Zustand", "Razorpay", "Postman", "Cursor"] },
 ];
 
 const TechStackSection = () => (
