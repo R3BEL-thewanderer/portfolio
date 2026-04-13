@@ -1,10 +1,11 @@
 import React, { useEffect, useRef, useState, lazy, Suspense } from "react";
-import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
+import { motion, useScroll, useTransform, MotionValue, AnimatePresence } from "framer-motion";
 import { Github, Linkedin, Mail } from "lucide-react";
 import Hls from "hls.js";
 
 // Lazy load Three.js galaxy to reduce initial bundle & unblock main thread
 const GalaxyCanvas = lazy(() => import("./components/GalaxyCanvas"));
+import LoadingScreen from "./components/LoadingScreen";
 
 const fadeUp = (delay: number = 0) => ({
   initial: { opacity: 0, y: 20 },
@@ -541,28 +542,39 @@ const Footer = () => (
    ============================ */
 
 export default function App() {
+  const [isLoading, setIsLoading] = useState(true);
+
   return (
-    <div className="min-h-screen font-sans overflow-x-hidden w-full">
-      {/* 3D Galaxy Canvas — lazy loaded to unblock main thread */}
-      <Suspense fallback={<div style={{ position: 'fixed', inset: 0, background: '#000', zIndex: 0 }} />}>
-        <GalaxyCanvas />
-      </Suspense>
-      <Navbar />
-      <main className="relative z-10">
-        <HeroSection />
-        <ProjectsSection />
-        <TechStackSection />
-        <MissionSection />
-        <SolutionSection />
-        <div className="relative z-10 border-t border-border/20">
-          <motion.div {...fadeUp(0)} className="text-center pt-20 pb-4">
-            <p className="text-xs tracking-[3px] uppercase text-muted-foreground/40 mb-4">ORBITING THE COSMOS</p>
-          </motion.div>
-          <RotatingOrbits />
-        </div>
-        <CTASection />
-      </main>
-      <Footer />
-    </div>
+    <>
+      <AnimatePresence mode="wait">
+        {isLoading && <LoadingScreen onComplete={() => setIsLoading(false)} />}
+      </AnimatePresence>
+
+      <div 
+        className="min-h-screen font-sans overflow-x-hidden w-full"
+        style={{ opacity: isLoading ? 0 : 1, transition: "opacity 0.5s ease-out" }}
+      >
+        {/* 3D Galaxy Canvas — lazy loaded to unblock main thread */}
+        <Suspense fallback={<div style={{ position: 'fixed', inset: 0, background: '#000', zIndex: 0 }} />}>
+          <GalaxyCanvas />
+        </Suspense>
+        <Navbar />
+        <main className="relative z-10">
+          <HeroSection />
+          <ProjectsSection />
+          <TechStackSection />
+          <MissionSection />
+          <SolutionSection />
+          <div className="relative z-10 border-t border-border/20">
+            <motion.div {...fadeUp(0)} className="text-center pt-20 pb-4">
+              <p className="text-xs tracking-[3px] uppercase text-muted-foreground/40 mb-4">ORBITING THE COSMOS</p>
+            </motion.div>
+            <RotatingOrbits />
+          </div>
+          <CTASection />
+        </main>
+        <Footer />
+      </div>
+    </>
   );
 }
