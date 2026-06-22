@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState, lazy, Suspense } from "react";
 import { motion, useScroll, useTransform, MotionValue, AnimatePresence } from "framer-motion";
-import { Github, Linkedin, Mail } from "lucide-react";
+import { Github, Linkedin, Mail, FileText } from "lucide-react";
 import Hls from "hls.js";
 import emailjs from "@emailjs/browser";
 
@@ -71,6 +71,10 @@ const Navbar = () => (
       </div>
     </div>
     <div className="flex items-center gap-2 md:gap-3 shrink-0">
+      <a href="/Ashish_Singh_Resume.html" target="_blank" rel="noreferrer" className="liquid-glass px-3 h-7 md:px-4 md:h-10 rounded-full flex items-center justify-center text-foreground hover:scale-105 transition-transform gap-2 font-heading font-semibold text-xs tracking-wide">
+        <FileText size={16} className="md:w-4 md:h-4" />
+        <span className="hidden md:inline">Resume</span>
+      </a>
       <a href="https://github.com/R3BEL-thewanderer" target="_blank" rel="noreferrer" className="liquid-glass w-7 h-7 md:w-10 md:h-10 rounded-full flex items-center justify-center text-foreground hover:scale-105 transition-transform">
         <Github size={16} className="md:w-4 md:h-4" />
       </a>
@@ -153,6 +157,13 @@ const HeroSection = () => (
           LET'S TALK
         </motion.button>
       </motion.form>
+
+      <motion.div {...fadeUp(0.4)} className="mt-8">
+        <a href="/Ashish_Singh_Resume.html" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-white/20 text-foreground hover:bg-white/10 transition-colors font-heading font-semibold tracking-wide text-sm">
+          <FileText size={18} />
+          View My Resume
+        </a>
+      </motion.div>
     </div>
   </section>
 );
