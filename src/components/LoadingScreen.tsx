@@ -5,7 +5,7 @@ interface LoadingScreenProps {
   onComplete: () => void;
 }
 
-const words = ["Design", "Create", "Inspire"];
+const words = ["Hello", "Namaste", "Hola", "Bonjour", "Ciao", "Konnichiwa"];
 
 const LoadingScreen = ({ onComplete }: LoadingScreenProps) => {
   const [progress, setProgress] = useState(0);
@@ -18,7 +18,7 @@ const LoadingScreen = ({ onComplete }: LoadingScreenProps) => {
     onCompleteRef.current = onComplete;
   }, [onComplete]);
 
-  // Rotating words: cycle every 900ms, stop at last word
+  // Rotating words: cycle through greetings every 700ms
   useEffect(() => {
     const interval = setInterval(() => {
       setWordIndex((prev) => {
@@ -28,19 +28,20 @@ const LoadingScreen = ({ onComplete }: LoadingScreenProps) => {
         }
         return prev + 1;
       });
-    }, 900);
+    }, 700);
     return () => clearInterval(interval);
   }, []);
 
-  // Counter: 000 → 100 over 2.7s using requestAnimationFrame
+  // Counter: 000 → 100 over 4.2s (matching word rotations) using requestAnimationFrame
   useEffect(() => {
     let startTime: number | null = null;
     let rafId: number;
+    const DURATION = 4200;
 
     const animate = (timestamp: number) => {
       if (!startTime) startTime = timestamp;
       const elapsed = timestamp - startTime;
-      const pct = Math.min((elapsed / 2700) * 100, 100);
+      const pct = Math.min((elapsed / DURATION) * 100, 100);
       setProgress(pct);
 
       if (pct < 100) {
@@ -92,10 +93,10 @@ const LoadingScreen = ({ onComplete }: LoadingScreenProps) => {
             key={wordIndex}
             className="text-4xl md:text-6xl lg:text-7xl font-display italic"
             style={{ color: "rgba(245, 245, 245, 0.8)" }}
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.4, ease: [...cubicEase] }}
+            exit={{ opacity: 0, y: -15 }}
+            transition={{ duration: 0.25, ease: [...cubicEase] }}
           >
             {words[wordIndex]}
           </motion.span>

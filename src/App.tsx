@@ -342,7 +342,7 @@ const MissionSection = () => {
         {/* Profile Photo */}
         <motion.div {...fadeUp(0)} className="w-40 h-40 md:w-52 md:h-52 flex-shrink-0 rounded-full overflow-hidden glass-card p-1">
           <img
-            src="/img/ashish_singh.jpeg"
+            src="/img/ashish_singh.png"
             alt="Ashish Singh"
             loading="lazy"
             className="w-full h-full object-cover rounded-full"
