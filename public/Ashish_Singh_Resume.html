@@ -3,10 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Resume of Ashish Singh – Second-year Information Technology student at TCET, Mumbai. Full-stack web development, AI integration, and cloud computing.">
 <title>Ashish Singh – Resume</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
@@ -26,21 +28,22 @@
   }
 
   /* ── HEADER ── */
-  .header {
+  header {
     border-bottom: 2.5px solid #1a2942;
     padding-bottom: 9px;
     margin-bottom: 10px;
   }
 
-  .name {
+  h1.name {
     font-size: 22pt;
     font-weight: 700;
     letter-spacing: -0.3px;
     color: #1a2942;
     line-height: 1;
+    margin: 0;
   }
 
-  .name span { font-weight: 300; }
+  h1.name span { font-weight: 300; }
 
   .tagline {
     font-size: 8.2pt;
@@ -52,10 +55,11 @@
     margin-bottom: 6px;
   }
 
-  .contact {
+  address.contact {
     font-size: 8.1pt;
     color: #444;
     line-height: 1.6;
+    font-style: normal;
   }
 
   .sep {
@@ -65,7 +69,7 @@
   }
 
   /* ── SECTION ── */
-  .section { margin-bottom: 9px; }
+  section.section { margin-bottom: 9px; }
 
   .section-title {
     font-size: 7.6pt;
@@ -100,7 +104,10 @@
   }
 
   /* ── PROJECT / EXP BLOCKS ── */
-  .block { margin-bottom: 8px; }
+  article.block {
+    margin-bottom: 8px;
+    page-break-inside: avoid;
+  }
 
   .block-header {
     display: flex;
@@ -173,225 +180,223 @@
     text-decoration: underline;
   }
 
-
   @media print {
     body { background: #fff; }
     .page { margin: 0; padding: 11mm 14mm 9mm 14mm; box-shadow: none; }
+    article.block { page-break-inside: avoid; }
   }
 </style>
 </head>
 <body>
-<div class="page">
+<main class="page">
 
   <!-- ═══════════════════════════════ HEADER ═══════════════════════════════ -->
-  <div class="header">
-    <div class="name"><span>ASHISH </span>SINGH</div>
-    <div class="tagline">Aspiring Full Stack Developer &nbsp;|&nbsp; Information Technology Undergraduate – TCET</div>
-    <div class="contact">
+  <header>
+    <h1 class="name"><span>ASHISH </span>SINGH</h1>
+    <div class="tagline">Information Technology &nbsp;·&nbsp; Full Stack Development &nbsp;·&nbsp; AI Integration</div>
+    <address class="contact">
       <span>Mumbai, Maharashtra</span>
       <span class="sep">|</span>
       <span>+91 77580 90180</span>
       <span class="sep">|</span>
       <span><a href="mailto:ashishhsingh4444@gmail.com">ashishhsingh4444@gmail.com</a></span>
       <span class="sep">|</span>
-      <span><a href="https://www.linkedin.com/in/ashish-singh-198505208/" target="_blank">linkedin</a></span>
+      <span><a href="https://www.linkedin.com/in/ashish-singh-209291369/" target="_blank" rel="noopener noreferrer">LinkedIn</a></span>
       <span class="sep">|</span>
-      <span><a href="https://github.com/R3BEL-thewanderer" target="_blank">github</a></span>
+      <span><a href="https://github.com/R3BEL-thewanderer" target="_blank" rel="noopener noreferrer">GitHub</a></span>
       <span class="sep">|</span>
-      <span><a href="https://portfolio.ashish-singh.xyz/" target="_blank">portfolio</a></span>
-    </div>
-  </div>
+      <span><a href="https://portfolio.ashish-singh.xyz/" target="_blank" rel="noopener noreferrer">Portfolio</a></span>
+    </address>
+  </header>
 
   <!-- ═══════════════════════════ PROFESSIONAL SUMMARY ═══════════════════════════ -->
-  <div class="section summary">
-    <div class="section-title">Professional Summary</div>
-    <p>Aspiring Full Stack Developer and AI Engineer pursuing a Bachelor of Engineering in Information Technology at Thakur College of Engineering and Technology (TCET), Mumbai. Experienced in designing and shipping full-stack web applications, AI-powered platforms, and automation workflows using modern technologies including React.js, Next.js, Node.js, MongoDB, Google Cloud Platform, and Vertex AI. Passionate about software engineering, artificial intelligence, cloud computing, and building scalable, production-grade solutions that address real-world challenges. Demonstrated ability to integrate Generative AI, Retrieval-Augmented Generation (RAG) systems, and autonomous AI agents into end-to-end full-stack architectures, with strong foundations in REST API design, database management, authentication systems, and cloud deployment.</p>
-  </div>
+  <section class="section summary">
+    <h2 class="section-title">Professional Summary</h2>
+    <p>Second-year Information Technology student at TCET, Mumbai, who enjoys building full-stack web applications and AI-powered tools. Comfortable working across React.js, Next.js, Node.js, Express.js, MongoDB, Supabase, and Google Cloud Platform. I learn best by building — most of my projects use AI-assisted development to move fast, while I focus on architecture, integration, testing, and deployment. Currently deepening my understanding of data structures, system design, and cloud infrastructure.</p>
+  </section>
 
   <!-- ═══════════════════════════ TECHNICAL SKILLS ═══════════════════════════ -->
-  <div class="section">
-    <div class="section-title">Technical Skills</div>
+  <section class="section">
+    <h2 class="section-title">Technical Skills</h2>
     <div class="skill-row"><strong>Programming Languages:</strong> &nbsp;JavaScript, TypeScript, Python, C, HTML5, CSS3</div>
     <div class="skill-row"><strong>Frontend:</strong> &nbsp;React.js, Next.js, Tailwind CSS, Framer Motion, Responsive Web Design</div>
-    <div class="skill-row"><strong>Backend:</strong> &nbsp;Node.js, Express.js, REST APIs, Authentication (JWT, OAuth, NextAuth)</div>
-    <div class="skill-row"><strong>Database:</strong> &nbsp;MongoDB, Mongoose, PostgreSQL, Supabase, Redis</div>
-    <div class="skill-row"><strong>Cloud &amp; AI:</strong> &nbsp;Google Cloud Platform (GCP), Vertex AI, Gemini API, OpenAI API, Cloud Run, CDN, RAG Systems, AI Agents, Generative AI</div>
-    <div class="skill-row"><strong>Tools &amp; Platforms:</strong> &nbsp;Git, GitHub, Vercel, n8n, Postman, Microsoft Office, Canva</div>
-    <div class="skill-row"><strong>Concepts:</strong> &nbsp;Data Structures &amp; Algorithms, Object-Oriented Programming, Database Management Systems, API Integration, State Management, Authentication Systems, Agile Development, Problem Solving</div>
-  </div>
+    <div class="skill-row"><strong>Backend:</strong> &nbsp;Node.js, Express.js, REST API Design, JWT Authentication, OAuth</div>
+    <div class="skill-row"><strong>Databases:</strong> &nbsp;MongoDB, Mongoose, PostgreSQL, Supabase</div>
+    <div class="skill-row"><strong>Cloud &amp; AI:</strong> &nbsp;Google Cloud Platform, Cloud Run, Vertex AI, Gemini API, OpenAI API</div>
+    <div class="skill-row"><strong>Developer Tools:</strong> &nbsp;Git, GitHub, Vercel, n8n, Postman, Figma, Photoshop</div>
+    <div class="skill-row"><strong>Currently Learning:</strong> &nbsp;Data Structures &amp; Algorithms, System Design Fundamentals, Docker</div>
+    <div class="skill-row"><strong>Concepts:</strong> &nbsp;REST Architecture, Database Modeling, Authentication Systems, API Integration, Object-Oriented Programming</div>
+  </section>
 
   <!-- ═══════════════════════════════ PROJECTS ═══════════════════════════════ -->
-  <div class="section">
-    <div class="section-title">Projects</div>
+  <section class="section">
+    <h2 class="section-title">Projects</h2>
+
+    <!-- Edu-Hub -->
+    <article class="block">
+      <div class="block-header">
+        <div class="block-title">Edu-Hub – Comprehensive Academic Notes Platform</div>
+        <div class="block-date">2026 – Present</div>
+      </div>
+      <div class="block-sub">Tech Stack: Next.js · React.js · Supabase · Python FastAPI · Gemini AI · Razorpay</div>
+      <div class="block-links">Website: <a href="https://edu-hub.co.in" target="_blank" rel="noopener noreferrer">edu-hub.co.in</a> | GitHub: <a href="https://github.com/R3BEL-thewanderer/fe-notes" target="_blank" rel="noopener noreferrer">github.com/R3BEL-thewanderer/fe-notes</a></div>
+      <ul class="bul">
+        <li>Designed and launched a free academic notes sharing platform for university students, structuring the frontend with Next.js App Router and building a serverless Python FastAPI backend.</li>
+        <li>Architected strict database schemas and Row Level Security (RLS) policies using Supabase PostgreSQL to manage users, subjects, structured study materials, and secure file storage buckets.</li>
+        <li>Configured secure access control through Supabase Auth (Email + Google OAuth) and backend JWT verification, protecting premium content like PDF downloads and AI chat access.</li>
+        <li>Integrated the Gemini AI API to provide a subject-specific study assistant chatbot, and set up Razorpay payment integration to unlock premium AI access functionality via webhook flows.</li>
+      </ul>
+    </article>
 
     <!-- Gradia -->
-    <div class="block">
+    <article class="block">
       <div class="block-header">
-        <div class="block-title">Gradia – AI-Powered EdTech Platform</div>
+        <div class="block-title">Gradia – AI-Powered Learning Platform for Neurodivergent Students</div>
         <div class="block-date">2025 – Present</div>
       </div>
       <div class="block-sub">Tech Stack: React.js · Node.js · Express.js · MongoDB · Google Vertex AI · Gemini API · JWT · OAuth</div>
-      <div class="block-links">GitHub: <a href="https://github.com/R3BEL-thewanderer/Gradia-Ai" target="_blank">github.com/R3BEL-thewanderer/Gradia-Ai</a></div>
+      <div class="block-links">GitHub: <a href="https://github.com/R3BEL-thewanderer/Gradia-Ai" target="_blank" rel="noopener noreferrer">github.com/R3BEL-thewanderer/Gradia-Ai</a></div>
       <ul class="bul">
-        <li>Developed a full-stack AI-powered learning platform for neurodivergent students, architecting the end-to-end application using React.js, Node.js, Express.js, and MongoDB to deliver adaptive, personalised educational experiences at scale.</li>
-        <li>Integrated Google Vertex AI and Gemini models to power AI Chat, Flashcard generation, Quiz creation, and Mind Map visualisation features, enabling intelligent, context-aware learning interactions tailored to individual student needs.</li>
-        <li>Implemented secure authentication using JWT and OAuth, building robust user management, session handling, and learner data protection across all platform modules.</li>
-        <li>Designed structured learning analytics dashboards and engineered AI-powered weekly insight generation, delivering personalised learning recommendations that dynamically adapt to individual student progress metrics.</li>
-        <li>Optimised backend architecture for scalability and performance, ensuring reliable AI model inference and seamless multi-user access under concurrent production load.</li>
+        <li>Designed the system architecture for a full-stack learning platform targeting neurodivergent students, structuring the frontend in React.js, backend in Node.js and Express.js, and database in MongoDB to support adaptive educational workflows.</li>
+        <li>Integrated Google Vertex AI and Gemini API to power four core features — AI Chat, Flashcard generation, Quiz creation, and Mind Map visualisation — using AI-assisted development to accelerate implementation.</li>
+        <li>Configured secure authentication using JWT and OAuth, handling user registration, login sessions, password hashing, and role-based access control across all platform modules.</li>
+        <li>Planned and structured a learning analytics dashboard that displays student progress data and AI-generated weekly study recommendations tailored to individual learning patterns.</li>
+        <li>Tested and debugged REST API endpoints across multiple development cycles, identifying and resolving issues with request handling, data validation, and concurrent user access.</li>
       </ul>
-    </div>
+    </article>
 
     <!-- Ekram -->
-    <div class="block">
+    <article class="block">
       <div class="block-header">
         <div class="block-title">Ekram Original – Full Stack E-Commerce Platform</div>
         <div class="block-date">Dec 2024 – Jan 2025</div>
       </div>
       <div class="block-sub">Tech Stack: Next.js · Node.js · MongoDB · Tailwind CSS · Framer Motion · NextAuth · JWT · bcrypt</div>
-      <div class="block-links">GitHub: <a href="https://github.com/R3BEL-thewanderer/ekram-original-clone" target="_blank">github.com/R3BEL-thewanderer/ekram-original-clone</a></div>
+      <div class="block-links">GitHub: <a href="https://github.com/R3BEL-thewanderer/ekram-original-clone" target="_blank" rel="noopener noreferrer">github.com/R3BEL-thewanderer/ekram-original-clone</a></div>
       <ul class="bul">
-        <li>Developed a full-stack e-commerce application using the Next.js App Router, implementing dynamic routing, server-side rendering, and scalable API endpoints for product management, cart handling, and order processing.</li>
-        <li>Implemented secure authentication using NextAuth, JWT, and bcrypt, building role-based access control and encrypted credential management for a production-grade authentication system.</li>
-        <li>Built a fully responsive, dynamic user interface using Tailwind CSS and Framer Motion, delivering smooth animations and cross-device compatibility optimised for performance and user experience.</li>
-        <li>Designed REST APIs and MongoDB database architecture with Mongoose, structuring efficient data models for products, users, orders, and inventory to support scalable e-commerce operations.</li>
-        <li>Implemented comprehensive form validation and optimised client-side state management, reducing UI errors and improving checkout flow reliability and overall conversion performance.</li>
+        <li>Designed and structured a full-stack e-commerce application using the Next.js App Router, configuring dynamic routing, server-side rendering, and API endpoints for product listings, cart management, and order processing.</li>
+        <li>Configured authentication using NextAuth and JWT with bcrypt password hashing, implementing user registration, login, role-based access control, and secure session management.</li>
+        <li>Built a responsive user interface using Tailwind CSS and Framer Motion, refining page layouts, product cards, and checkout flows for consistent cross-device rendering.</li>
+        <li>Designed MongoDB collections with Mongoose schemas for products, users, orders, and inventory, and built corresponding REST API endpoints for CRUD operations.</li>
       </ul>
-    </div>
+    </article>
 
     <!-- MobilePhoneComparisons -->
-    <div class="block">
+    <article class="block">
       <div class="block-header">
         <div class="block-title">MobilePhoneComparisons – AI-Powered Device Comparison Platform</div>
         <div class="block-date">2025 – Present</div>
       </div>
-      <div class="block-sub">Tech Stack: React.js · Next.js · Supabase · Redis · Google Cloud Platform · Vertex AI</div>
-      <div class="block-links">GitHub: <a href="https://github.com/R3BEL-thewanderer/mobilephonecomparisions" target="_blank">github.com/R3BEL-thewanderer/mobilephonecomparisions</a></div>
+      <div class="block-sub">Tech Stack: React.js · Next.js · Supabase · Google Cloud Platform · Vertex AI</div>
+      <div class="block-links">GitHub: <a href="https://github.com/R3BEL-thewanderer/mobilephonecomparisions" target="_blank" rel="noopener noreferrer">github.com/R3BEL-thewanderer/mobilephonecomparisions</a></div>
       <ul class="bul">
-        <li>Building a scalable AI-powered mobile device comparison platform inspired by GSMArena and 91Mobiles, designing the full-stack architecture using React.js, Next.js, Supabase, Redis, and Google Cloud Platform.</li>
-        <li>Developing autonomous AI agents for automated data collection, specification extraction, and comparison generation, reducing manual content operations through intelligent end-to-end automation workflows.</li>
-        <li>Implementing real-time data pipelines and intelligent recommendation systems powered by Vertex AI, enabling dynamic, context-aware product comparisons and personalised device suggestions for users.</li>
-        <li>Architecting a high-performance database and caching layer using Supabase (PostgreSQL) and Redis, optimising query throughput and ensuring low-latency data retrieval under high-volume traffic.</li>
+        <li>Designing a mobile device comparison platform inspired by GSMArena, planning the full-stack architecture with React.js and Next.js on the frontend and Supabase (PostgreSQL) as the primary database.</li>
+        <li>Configuring AI-assisted data collection workflows using Vertex AI to extract and structure device specifications, reducing manual content entry across hundreds of device records.</li>
+        <li>Designing Supabase database schemas for device specifications, side-by-side comparisons, and user preference storage, with structured queries for filtered search and sorting.</li>
+        <li>Deploying the application on Google Cloud Platform, configuring environment variables, build pipelines, and cloud hosting for the frontend and API layer.</li>
       </ul>
-    </div>
+    </article>
 
     <!-- AI Automation Agents -->
-    <div class="block">
+    <article class="block">
       <div class="block-header">
         <div class="block-title">AI Automation Agents – Workflow Automation Suite</div>
         <div class="block-date">2024 – Present</div>
       </div>
-      <div class="block-sub">Tech Stack: n8n · Vertex AI · Gemini API · Python · Web Scraping · RAG Systems</div>
+      <div class="block-sub">Tech Stack: n8n · Vertex AI · Gemini API · Python · Web Scraping · RAG Pipelines</div>
       <ul class="bul">
-        <li>Developed multiple AI automation workflows using n8n and Vertex AI, building end-to-end pipelines for automated data extraction, cleaning, transformation, and AI response generation at scale.</li>
-        <li>Built Retrieval-Augmented Generation (RAG) systems using web scraping pipelines and large language models, enabling AI agents to deliver context-aware, knowledge-grounded responses from live data sources.</li>
-        <li>Integrated AI chatbots into full-stack web applications, implementing context-aware conversation management and real-time inference to enhance user interaction and automate support workflows.</li>
-        <li>Automated complex, multi-step data processing pipelines, reducing manual overhead and enabling scalable intelligent operations across data extraction, enrichment, and AI-assisted analysis workflows.</li>
+        <li>Designed and configured multiple AI automation workflows using n8n and Vertex AI, connecting web scraping, data transformation, and LLM-based response generation into end-to-end pipelines.</li>
+        <li>Built Retrieval-Augmented Generation (RAG) pipelines by feeding scraped web data into Gemini and Vertex AI models, enabling AI agents to answer questions grounded in real, external content.</li>
+        <li>Integrated AI chatbot functionality into web applications, configuring conversation history management, prompt templates, and API calls to deliver context-aware responses to users.</li>
       </ul>
-    </div>
-  </div>
+    </article>
+  </section>
 
   <!-- ═══════════════════════ LEADERSHIP & EXPERIENCE ═══════════════════════ -->
-  <div class="section">
-    <div class="section-title">Leadership &amp; Experience</div>
+  <section class="section">
+    <h2 class="section-title">Leadership &amp; Experience</h2>
 
-    <div class="block">
+    <article class="block">
       <div class="block-header">
         <div class="block-title">Indian Society for Technical Education (ISTE) – TCET Chapter</div>
         <div class="block-date">2025 – Present</div>
       </div>
       <div class="block-sub">Working Committee Member</div>
       <ul class="bul">
-        <li>Collaborated with cross-functional teams to plan and execute institute-level technical events, workshops, and seminars, contributing to the professional development of 100+ student participants.</li>
-        <li>Designed promotional assets and branding materials for student engagement initiatives, applying visual communication skills to drive event participation and institutional visibility.</li>
-        <li>Coordinated event registrations and on-ground management across multi-stakeholder technical programmes, ensuring seamless execution and positive attendee experience.</li>
-        <li>Strengthened teamwork, professional communication, and project management capabilities through active leadership responsibilities within a structured student technical body.</li>
+        <li>Collaborated with cross-functional teams to plan and execute institute-level technical events and workshops, contributing to programmes attended by 100+ students.</li>
+        <li>Designed promotional assets and branding materials for student engagement initiatives using Photoshop and Canva.</li>
+        <li>Coordinated event registrations and on-ground logistics across multi-stakeholder technical programmes.</li>
       </ul>
-    </div>
+    </article>
 
-    <div class="block">
+    <article class="block">
       <div class="block-header">
-        <div class="block-title">Sainik School</div>
-        <div class="block-date">2022 to 2024</div>
+        <div class="block-title">Sainik School – Vice Cadet Captain &amp; Assistant Cultural Head</div>
+        <div class="block-date">2022 – 2024</div>
       </div>
-      <div class="block-sub">Vice Cadet Captain &amp; Assistant Cultural Head</div>
       <ul class="bul">
-        <li>Led student teams in planning and executing large-scale cultural programmes and institutional events, demonstrating initiative and accountability in high-responsibility leadership roles.</li>
-        <li>Delegated responsibilities and managed communication across cadet groups, developing strong team coordination, discipline, and public speaking capabilities in a structured, performance-driven environment.</li>
-        <li>Maintained operational discipline and ensured structured, outcome-focused execution of institutional activities across diverse student cohorts, building transferable leadership and people-management skills.</li>
+        <li>Led a student body of 460+ cadets, coordinating academic and cultural activities in a structured, performance-driven environment.</li>
+        <li>Managed communication and task delegation across cadet groups, developing team coordination, discipline, and public speaking skills.</li>
       </ul>
-    </div>
-  </div>
+    </article>
+  </section>
 
   <!-- ═══════════════════════════════ EDUCATION ═══════════════════════════════ -->
-  <div class="section">
-    <div class="section-title">Education</div>
+  <section class="section">
+    <h2 class="section-title">Education</h2>
 
     <!-- B.E. -->
-    <div class="block">
+    <article class="block">
       <div class="block-header">
         <div class="block-title">Bachelor of Engineering (B.E.) – Information Technology</div>
         <div class="block-date">Sept 2025 – Apr 2029 (Expected)</div>
       </div>
-      <div class="block-sub">Thakur College of Engineering and Technology (TCET), Mumbai University &nbsp;·&nbsp; Mumbai, Maharashtra, India</div>
+      <div class="block-sub">Thakur College of Engineering and Technology (TCET), Mumbai University &nbsp;·&nbsp; Mumbai, Maharashtra</div>
       <ul class="bul">
-        <li>Pursuing a Bachelor's degree in Information Technology with a focus on Full Stack Development, Artificial Intelligence, Cloud Computing, and Software Engineering.</li>
-        <li>Actively building hands-on projects involving React.js, Next.js, Node.js, MongoDB, Google Cloud Platform, and Generative AI technologies.</li>
-        <li>Member of the ISTE Working Committee, contributing to technical events and collaborative initiatives.</li>
+        <li>Pursuing B.E. in Information Technology with a focus on Full Stack Development, AI, and Cloud Computing. Active member of the ISTE Working Committee.</li>
       </ul>
-    </div>
+    </article>
 
     <!-- HSC -->
-    <div class="block">
+    <article class="block">
       <div class="block-header">
         <div class="block-title">Higher Secondary Certificate (HSC)</div>
         <div class="block-date">Jun 2022 – Apr 2024</div>
       </div>
       <div class="block-sub">Padmashri Dr. Vitthalrao Vikhe Patil Sainik School &nbsp;·&nbsp; Maharashtra State Board &nbsp;·&nbsp; Percentage: 68.67%</div>
-      <ul class="bul">
-        <li>Participated in Badminton, Swimming, Horse Riding, and Parade Drill.</li>
-        <li>Developed strong discipline, leadership, teamwork, and time management skills through structured military-style training.</li>
-        <li>Served as Vice Cadet Captain and Assistant Cultural Head, leading student teams and organizing institutional events.</li>
-      </ul>
-    </div>
+    </article>
 
     <!-- SSC -->
-    <div class="block">
+    <article class="block">
       <div class="block-header">
         <div class="block-title">Secondary School Certificate (SSC)</div>
         <div class="block-date">2021 – 2022</div>
       </div>
       <div class="block-sub">Mother Mary's English High School and Junior College &nbsp;·&nbsp; Maharashtra State Board &nbsp;·&nbsp; Percentage: 87.80%</div>
-      <ul class="bul">
-        <li>Built a strong academic foundation in Mathematics, Science, and Analytical Problem Solving.</li>
-        <li>Actively participated in academic and extracurricular activities, developing communication and collaborative skills.</li>
-      </ul>
-    </div>
+    </article>
 
-  </div>
-
+  </section>
 
   <!-- ═══════════════════════ ACHIEVEMENTS & ACTIVITIES ═══════════════════════ -->
-  <div class="section">
-    <div class="section-title">Achievements &amp; Activities</div>
+  <section class="section">
+    <h2 class="section-title">Achievements &amp; Activities</h2>
     <ul class="bul">
-      <li>Built multiple full-stack and AI-powered production-oriented applications — including an adaptive EdTech platform, an e-commerce system, and an AI automation suite — addressing real-world challenges using Generative AI, cloud computing, and modern web technologies.</li>
-      <li>Participated in AI Buildathon at E-Summit, TCET, applying full-stack and AI engineering capabilities in a competitive, time-constrained environment to develop functional solutions.</li>
-      <li>Organised and contributed to technical events, workshops, and cultural programmes at institutional level through ISTE Working Committee membership at TCET.</li>
-      <li>Demonstrated leadership, discipline, and team management in high-responsibility roles as Vice Cadet Captain and Assistant Cultural Head at Sainik School.</li>
-      <li>Developed hands-on expertise across the AI engineering stack — Generative AI, RAG Systems, AI Agents, Google Cloud Platform — by integrating these technologies into real, deployed projects.</li>
+      <li>Participated in AI Buildathon at E-Summit, TCET — designed and presented a functional AI-powered prototype within a competitive, time-constrained environment.</li>
+      <li>Self-taught full-stack development and AI integration through project-based learning, building and deploying 4+ web applications using React.js, Next.js, Node.js, MongoDB, GCP, and Vertex AI during second year of engineering.</li>
+      <li>Served as Vice Cadet Captain at Sainik School, leading a student body of 460+ cadets across academic and cultural activities.</li>
     </ul>
-  </div>
+  </section>
 
   <!-- ═══════════════════════ ADDITIONAL INFORMATION ═══════════════════════ -->
-  <div class="section">
-    <div class="section-title">Additional Information</div>
+  <section class="section">
+    <h2 class="section-title">Additional Information</h2>
     <ul class="bul">
       <li><strong>Languages:</strong> English (Fluent) · Hindi (Fluent) · Marathi (Fluent)</li>
-      <li><strong>Interests:</strong> Artificial Intelligence, Open Source Development, Cloud Computing, Automation, Software Engineering, Technical Problem Solving</li>
-      <li><strong>Availability:</strong> Open to Software Engineering internships, Full Stack Development roles, and AI Engineering opportunities — immediate availability for remote and on-site positions.</li>
+      <li><strong>Interests:</strong> AI &amp; Automation, Cloud Computing, Open Source, Software Engineering</li>
+      <li><strong>Availability:</strong> Open to internships and entry-level roles in Software Engineering, Full Stack Development, and AI — available for remote and on-site positions.</li>
     </ul>
-  </div>
+  </section>
 
-</div>
+</main>
 </body>
 </html>
