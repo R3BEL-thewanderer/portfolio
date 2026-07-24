@@ -174,6 +174,17 @@ const HeroSection = () => (
 
 const projects = [
   {
+    name: "Edu-Hub — TCET Notes Hub",
+    category: "Full Stack · Platform",
+    year: "2026",
+    desc: "A comprehensive academic platform featuring secure RLS access, inline PDF viewing, Razorpay premium unlocks, and a context-aware Gemini AI chatbot. Built with Next.js and Python FastAPI.",
+    github: "https://github.com/R3BEL-thewanderer/fe-notes",
+    demo: "https://edu-hub.co.in",
+    image: "/img/edu-hub-logo.png",
+    imageFit: "contain" as const,
+    imageBg: "rgba(255,255,255,1)",
+  },
+  {
     name: "Gradia — AI Grading System",
     category: "AI · EdTech",
     year: "2025",
