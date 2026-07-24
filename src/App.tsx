@@ -7,7 +7,7 @@ import emailjs from "@emailjs/browser";
 // Lazy load Three.js galaxy to reduce initial bundle & unblock main thread
 const GalaxyCanvas = lazy(() => import("./components/GalaxyCanvas"));
 import LoadingScreen from "./components/LoadingScreen";
-import Chatbot from "./components/Chatbot/Chatbot";
+// Chatbot import omitted from build — not yet pushed to repo
 
 const fadeUp = (delay: number = 0) => ({
   initial: { opacity: 0, y: 20 },
@@ -779,7 +779,7 @@ export default function App() {
           <CTASection />
         </main>
         <Footer />
-        <Chatbot />
+        {/* <Chatbot /> — not yet pushed to repo */}
       </div>
     </>
   );
