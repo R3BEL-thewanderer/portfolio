@@ -350,10 +350,10 @@ const ProjectsSection = () => {
   });
 
   return (
-    <section ref={targetRef} id="projects" className="relative h-[300vh] z-10 w-full overflow-visible">
-      <div className="sticky top-0 h-screen w-full flex flex-col justify-center overflow-hidden">
+    <section ref={targetRef} id="projects" className="relative h-[300vh] z-10 w-full overflow-clip">
+      <div className="sticky top-0 h-[100dvh] w-full flex flex-col justify-center overflow-hidden">
         {/* Section Header */}
-        <div className="absolute top-24 left-0 right-0 px-6 md:px-12 container mx-auto text-center z-20">
+        <div className="absolute top-16 md:top-24 left-0 right-0 px-6 md:px-12 container mx-auto text-center z-20">
           <motion.div {...fadeUp(0)} className="inline-flex items-center gap-2 text-xs tracking-[4px] uppercase font-heading font-semibold mb-2 text-white/50">
             <Sparkles className="w-3.5 h-3.5" />
             FEATURED PORTFOLIO
@@ -365,7 +365,7 @@ const ProjectsSection = () => {
 
         {/* Absolute Centered Track Container */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none px-6">
-          <div className="relative w-full h-full flex items-center justify-center pointer-events-auto mt-32 md:mt-48 lg:mt-56">
+          <div className="relative w-full h-full flex items-center justify-center pointer-events-auto mt-48 md:mt-56 lg:mt-64">
             {projects.map((project, index) => (
               <ProjectCard 
                 key={project.id} 
@@ -478,8 +478,8 @@ const TechStackSection = () => {
   });
 
   return (
-    <section ref={targetRef} id="skills" className="relative h-[600vh] z-10 w-full mb-32">
-      <div className="sticky top-0 h-screen w-full flex flex-col justify-center overflow-hidden">
+    <section ref={targetRef} id="skills" className="relative h-[600vh] z-10 w-full mb-32 overflow-clip">
+      <div className="sticky top-0 h-[100dvh] w-full flex flex-col justify-center overflow-hidden">
         {skills.map((skill, index) => (
           <CategorySegment 
             key={skill.name} 
