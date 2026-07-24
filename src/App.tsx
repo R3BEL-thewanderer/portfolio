@@ -1,12 +1,13 @@
 import React, { useEffect, useRef, useState, lazy, Suspense } from "react";
 import { motion, useScroll, useTransform, MotionValue, AnimatePresence } from "framer-motion";
-import { Github, Linkedin, Mail, FileText } from "lucide-react";
+import { Github, Linkedin, Mail, FileText, Globe, Sparkles } from "lucide-react";
 import Hls from "hls.js";
 import emailjs from "@emailjs/browser";
 
 // Lazy load Three.js galaxy to reduce initial bundle & unblock main thread
 const GalaxyCanvas = lazy(() => import("./components/GalaxyCanvas"));
 import LoadingScreen from "./components/LoadingScreen";
+import Chatbot from "./components/Chatbot/Chatbot";
 
 const fadeUp = (delay: number = 0) => ({
   initial: { opacity: 0, y: 20 },
@@ -115,10 +116,9 @@ const HeroSection = () => (
     {/* Content — relative z-10, pt-24 clears the fixed navbar */}
     <div className="relative z-10 flex flex-col items-center justify-center w-full px-4 pt-24 pb-12 text-center max-w-4xl mx-auto">
       <motion.div {...fadeUp(0)} className="flex items-center gap-2 md:gap-3 mb-6 md:mb-8 flex-wrap justify-center">
-        <div className="flex items-center gap-1.5">
-          <span className="text-base md:text-lg">🪐</span>
-          <span className="text-sm md:text-base">🌍</span>
-          <span className="text-xs md:text-sm">✦</span>
+        <div className="flex items-center gap-1.5 text-sky-400">
+          <Globe className="w-4 h-4" />
+          <Sparkles className="w-3.5 h-3.5 text-amber-300" />
         </div>
         <div className="flex items-center gap-2">
           <span className="relative flex h-2.5 w-2.5">
@@ -169,15 +169,18 @@ const HeroSection = () => (
 );
 
 /* ============================
-   PROJECTS SECTION
+   PROJECTS SECTION (Pinned Horizontal Scroll)
    ============================ */
 
 const projects = [
   {
+    id: "01",
     name: "Edu-Hub — TCET Notes Hub",
     category: "Full Stack · Platform",
+    status: "Live Production",
     year: "2026",
-    desc: "A comprehensive academic platform featuring secure RLS access, inline PDF viewing, Razorpay premium unlocks, and a context-aware Gemini AI chatbot. Built with Next.js and Python FastAPI.",
+    desc: "A comprehensive academic platform featuring secure RLS access, inline PDF viewing, Razorpay premium unlocks, and a context-aware Gemini AI chatbot. Built specifically for engineering students.",
+    tags: ["Next.js 15", "FastAPI", "PostgreSQL", "Razorpay", "Gemini AI", "Supabase"],
     github: "https://github.com/R3BEL-thewanderer/fe-notes",
     demo: "https://edu-hub.co.in",
     image: "/img/edu-hub-logo.png",
@@ -185,10 +188,13 @@ const projects = [
     imageBg: "rgba(255,255,255,1)",
   },
   {
+    id: "02",
     name: "Gradia — AI Grading System",
     category: "AI · EdTech",
+    status: "Active Beta",
     year: "2025",
-    desc: "A full-stack AI-powered grading platform that evaluates student answers using LLMs. Teachers upload question papers and rubrics; the system auto-grades responses with detailed feedback, reducing manual effort by 80%.",
+    desc: "A full-stack AI-powered grading platform that evaluates student answers using LLMs. Teachers upload question papers and rubrics; the system auto-grades responses with detailed feedback, reducing manual grading effort by 80%.",
+    tags: ["React 19", "Python", "FastAPI", "LLM Evaluation", "Tailwind CSS"],
     github: "https://github.com/R3BEL-thewanderer/Gradia-Ai",
     demo: null,
     image: "/img/Gradia Logo(Light Mode-Primary).png",
@@ -196,10 +202,13 @@ const projects = [
     imageBg: "rgba(255,255,255,0.95)",
   },
   {
+    id: "03",
     name: "Ekram Original",
     category: "E-commerce · Full Stack",
+    status: "Live Production",
     year: "2024",
     desc: "A premium e-commerce platform featuring a custom shopping cart, seamless checkout flow, and intelligent inventory management. Built with Next.js, Node.js, and PostgreSQL.",
+    tags: ["Next.js", "Node.js", "Express", "PostgreSQL", "Tailwind CSS"],
     github: "https://github.com/R3BEL-thewanderer/ekram-original-clone",
     demo: "https://ekram-original-clone.ashish-singh.xyz",
     image: "/img/ekram-original.png",
@@ -207,10 +216,13 @@ const projects = [
     imageBg: undefined,
   },
   {
+    id: "04",
     name: "MobilePhoneComparisons",
     category: "Web App · Data",
+    status: "Live Deployment",
     year: "2024",
     desc: "A smart mobile phone comparison tool with real-time specs fetching, side-by-side feature comparison, and AI-generated buy recommendations.",
+    tags: ["React", "Node.js", "REST APIs", "Tailwind CSS"],
     github: "https://github.com/R3BEL-thewanderer/mobilephonecomparisions",
     demo: "https://mobilephonecomparisions.ashish-singh.xyz",
     image: "/img/mobilephonecomparisions1.png",
@@ -218,10 +230,13 @@ const projects = [
     imageBg: undefined,
   },
   {
+    id: "05",
     name: "AI Agent Workflows",
     category: "AI · Automation",
+    status: "Automation Pipeline",
     year: "2025",
     desc: "A collection of multi-step AI agent pipelines built with LangChain & n8n — including a resume screener, social media content agent, and automated research assistant.",
+    tags: ["LangChain", "n8n", "OpenAI", "Python", "Docker"],
     github: null,
     demo: null,
     image: "/img/n8n1.png",
@@ -230,100 +245,254 @@ const projects = [
   },
 ];
 
-const ProjectCard = ({ project, delay }: { project: typeof projects[0]; delay: number }) => (
-  <motion.div {...fadeUp(delay)} className="glass-card rounded-2xl overflow-hidden cursor-pointer group">
-    <div
-      className="h-[200px] flex items-center justify-center overflow-hidden"
-      style={{ background: project.imageBg || "transparent" }}
+const ProjectCard = ({ project, index, total, scrollYProgress }: { project: any, index: number, total: number, scrollYProgress: any }) => {
+  const centerProgress = index / (total - 1);
+  const step = 1 / (total - 1);
+
+  // Map progress to arc path
+  const x = useTransform(scrollYProgress, [centerProgress - step, centerProgress, centerProgress + step], ["100vw", "0vw", "-100vw"]);
+  const y = useTransform(scrollYProgress, [centerProgress - step, centerProgress, centerProgress + step], ["-25vh", "0vh", "-25vh"]);
+  const scale = useTransform(scrollYProgress, [centerProgress - step, centerProgress, centerProgress + step], [0.85, 1, 0.85]);
+  const opacity = useTransform(
+    scrollYProgress,
+    [centerProgress - step, centerProgress - step/3, centerProgress + step/3, centerProgress + step],
+    [0, 1, 1, 0]
+  );
+
+  return (
+    <motion.div
+      style={{ x, y, scale, opacity }}
+      className="absolute w-[90vw] md:w-[80vw] lg:w-[70vw] max-w-5xl h-[60vh] flex flex-col lg:flex-row gap-8 md:gap-12 justify-center lg:justify-between items-center"
     >
-      <img
-        src={project.image}
-        alt={project.name}
-        loading="lazy"
-        className="w-full h-full opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"
-        style={{ objectFit: project.imageFit }}
-      />
-    </div>
-    <div className="p-6">
-      <div className="flex justify-between items-center mb-2">
-        <span className="text-[11px] font-heading font-semibold tracking-[3px] uppercase gradient-label">{project.category}</span>
-        <span className="text-xs font-heading text-muted-foreground">{project.year}</span>
+      {/* Left Side: Thumbnail / Visual */}
+      <div 
+        className="w-full lg:w-1/2 h-44 md:h-64 lg:h-full rounded-2xl overflow-hidden relative flex items-center justify-center flex-shrink-0 group"
+        style={{ background: project.imageBg || "rgba(255, 255, 255, 0.03)" }}
+      >
+        <img
+          src={project.image}
+          alt={project.name}
+          loading="lazy"
+          className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+          style={{ objectFit: project.imageFit }}
+        />
+        {/* Floating Number Badge */}
+        <span className="absolute top-4 left-4 text-xs font-mono font-bold px-3 py-1.5 rounded-full bg-black/60 backdrop-blur-md text-white/90">
+          {project.id} / 05
+        </span>
       </div>
-      <h3 className="font-display font-bold text-xl mb-2 tracking-tight">{project.name}</h3>
-      <p className="text-sm text-muted-foreground leading-relaxed mb-4 font-light">{project.desc}</p>
-      <div className="flex gap-3">
-        {project.demo && (
-          <a href={project.demo} target="_blank" rel="noreferrer" className="text-xs font-heading font-medium px-5 py-2.5 rounded-full border border-white/10 text-muted-foreground hover:text-foreground hover:border-white/30 hover:bg-white/5 transition-all tracking-wide">
-            ↗ Demo
-          </a>
-        )}
-        {project.github && (
-          <a href={project.github} target="_blank" rel="noreferrer" className="text-xs font-heading font-medium px-5 py-2.5 rounded-full border border-white/10 text-muted-foreground hover:text-foreground hover:border-white/30 hover:bg-white/5 transition-all tracking-wide">
-            ⌥ GitHub
-          </a>
-        )}
+
+      {/* Right Side: Details & Actions */}
+      <div className="w-full lg:w-1/2 flex flex-col justify-center h-full z-10">
+        <div className="flex items-center gap-3 mb-4">
+          <span className="text-[11px] font-heading font-semibold tracking-[3px] uppercase text-sky-400">
+            {project.category}
+          </span>
+          <span className="text-white/20">•</span>
+          <span className="inline-flex items-center gap-1.5 text-[11px] font-heading font-medium text-emerald-400 uppercase tracking-wider">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+            {project.status}
+          </span>
+        </div>
+
+        <h3 className="font-display font-bold text-3xl md:text-4xl lg:text-5xl mb-4 tracking-tight text-white group-hover:text-white/90 transition-colors">
+          {project.name}
+        </h3>
+
+        <p className="text-sm md:text-base text-white/50 leading-relaxed font-light mb-8 max-w-lg">
+          {project.desc}
+        </p>
+
+        {/* Tech Stack Pills - Minimalist text only */}
+        <div className="flex flex-wrap gap-x-4 gap-y-2 mb-8">
+          {project.tags.map((tag: string) => (
+            <span key={tag} className="text-[11px] uppercase tracking-wider text-white/40 font-heading">
+              {tag}
+            </span>
+          ))}
+        </div>
+
+        {/* Actions - Minimalist text links */}
+        <div className="flex items-center gap-8 pt-6 border-t border-white/5">
+          {project.demo && (
+            <a
+              href={project.demo}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 text-xs md:text-sm font-heading font-medium tracking-widest text-white hover:text-white/60 transition-colors border-b border-transparent hover:border-white/30 pb-0.5"
+            >
+              <Globe className="w-3.5 h-3.5" />
+              LIVE DEMO
+            </a>
+          )}
+          {project.github && (
+            <a
+              href={project.github}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 text-xs md:text-sm font-heading font-medium tracking-widest text-white/50 hover:text-white transition-colors border-b border-transparent hover:border-white/30 pb-0.5"
+            >
+              <Github className="w-3.5 h-3.5" />
+              SOURCE CODE
+            </a>
+          )}
+        </div>
       </div>
-    </div>
-  </motion.div>
-);
+    </motion.div>
+  );
+};
 
-const ProjectsSection = () => (
-  <section id="projects" className="pt-52 md:pt-64 pb-6 md:pb-9 px-8 container mx-auto relative z-10">
-    <motion.h2 {...fadeUp(0)} className="text-5xl md:text-7xl lg:text-8xl text-center tracking-[-3px] font-display font-bold mb-6">
-      Selected <span className="font-serif italic font-normal">Work.</span>
-    </motion.h2>
-    <motion.p {...fadeUp(0.1)} className="text-muted-foreground text-lg font-heading font-light max-w-2xl mx-auto text-center mb-24 leading-relaxed">
-      From AI-powered tools to full-stack platforms — real problems, real solutions.
-    </motion.p>
+const ProjectsSection = () => {
+  const targetRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: targetRef,
+    offset: ["start start", "end end"],
+  });
 
-    <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto mb-20">
-      {projects.map((project, i) => (
-        <ProjectCard key={i} project={project} delay={0.2 + i * 0.1} />
-      ))}
-    </div>
-  </section>
-);
+  return (
+    <section ref={targetRef} id="projects" className="relative h-[300vh] z-10 w-full overflow-visible">
+      <div className="sticky top-0 h-screen w-full flex flex-col justify-center overflow-hidden">
+        {/* Section Header */}
+        <div className="absolute top-24 left-0 right-0 px-6 md:px-12 container mx-auto text-center z-20">
+          <motion.div {...fadeUp(0)} className="inline-flex items-center gap-2 text-xs tracking-[4px] uppercase font-heading font-semibold mb-2 text-white/50">
+            <Sparkles className="w-3.5 h-3.5" />
+            FEATURED PORTFOLIO
+          </motion.div>
+          <motion.h2 {...fadeUp(0.1)} className="text-4xl md:text-5xl lg:text-7xl tracking-[-2px] font-display font-bold">
+            Selected <span className="font-serif italic font-normal text-white/80">Work.</span>
+          </motion.h2>
+        </div>
 
-/* ============================
-   TECH STACK SECTION
-   ============================ */
-
-const skills = [
-  { icon: "⚛️", name: "Frontend", tags: ["React 19", "Next.js 15", "TypeScript", "Tailwind CSS", "Framer Motion", "Radix UI", "shadcn/ui", "HTML", "CSS"] },
-  { icon: "🖥️", name: "Backend", tags: ["Node.js", "Express.js", "FastAPI", "Python", "REST APIs", "JWT", "Zod"] },
-  { icon: "🗄️", name: "Database", tags: ["MongoDB", "Mongoose", "PostgreSQL", "Supabase", "Firebase", "Redis"] },
-  { icon: "🤖", name: "AI & Automation", tags: ["Vertex AI", "Gemini", "OpenAI API", "LangChain", "n8n", "AI Agents", "RAG"] },
-  { icon: "☁️", name: "Cloud & DevOps", tags: ["GCP", "Cloud Run", "Cloud Build", "Docker", "Vercel", "Render", "Git", "GitHub Actions"] },
-  { icon: "🎨", name: "UI & Tools", tags: ["Figma", "Vite", "Recharts", "React Query", "SWR", "Zustand", "Razorpay", "Postman", "Cursor"] },
-];
-
-const TechStackSection = () => (
-  <section id="skills" className="py-32 md:py-44 px-6 container mx-auto relative z-10">
-    <motion.p {...fadeUp(0)} className="text-xs tracking-[4px] uppercase font-heading font-semibold mb-6 text-center gradient-label">
-      TECH STACK
-    </motion.p>
-    <motion.h2 {...fadeUp(0.1)} className="text-4xl md:text-6xl font-display font-bold tracking-[-2px] mb-6 text-center">
-      Tools I <span className="font-serif italic font-normal">build</span> with.
-    </motion.h2>
-    <motion.p {...fadeUp(0.15)} className="text-muted-foreground text-base font-heading font-light max-w-lg mx-auto text-center mb-16 leading-relaxed">
-      A curated set of technologies I use to design, build, and ship production-ready applications.
-    </motion.p>
-
-    <div className="grid md:grid-cols-3 gap-5 max-w-4xl mx-auto">
-      {skills.map((skill, i) => (
-        <motion.div key={i} {...fadeUp(0.2 + i * 0.08)} className="glass-card rounded-2xl p-7">
-          <div className="text-3xl mb-4">{skill.icon}</div>
-          <h3 className="font-display font-bold text-lg mb-4 tracking-tight">{skill.name}</h3>
-          <div className="flex flex-wrap gap-2.5">
-            {skill.tags.map((tag) => (
-              <span key={tag} className="skill-tag">{tag}</span>
+        {/* Absolute Centered Track Container */}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none px-6">
+          <div className="relative w-full h-full flex items-center justify-center pointer-events-auto mt-32 md:mt-48 lg:mt-56">
+            {projects.map((project, index) => (
+              <ProjectCard 
+                key={project.id} 
+                project={project} 
+                index={index} 
+                total={projects.length} 
+                scrollYProgress={scrollYProgress} 
+              />
             ))}
           </div>
-        </motion.div>
-      ))}
-    </div>
-  </section>
-);
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const skills = [
+  { name: "Frontend", tags: ["React 19", "Next.js 15", "TypeScript", "Tailwind CSS", "Framer Motion", "Radix UI", "shadcn/ui", "HTML", "CSS"] },
+  { name: "Backend", tags: ["Node.js", "Express.js", "FastAPI", "Python", "REST APIs", "JWT", "Zod"] },
+  { name: "Database", tags: ["MongoDB", "Mongoose", "PostgreSQL", "Supabase", "Firebase", "Redis"] },
+  { name: "AI & Automation", tags: ["Vertex AI", "Gemini", "OpenAI API", "LangChain", "n8n", "AI Agents", "RAG"] },
+  { name: "Cloud & DevOps", tags: ["GCP", "Cloud Run", "Cloud Build", "Docker", "Vercel", "Render", "Git", "GitHub Actions"] },
+  { name: "UI & Tools", tags: ["Figma", "Vite", "Recharts", "React Query", "SWR", "Zustand", "Razorpay", "Postman", "Cursor"] },
+];
+
+const HighlightTag = ({ tag, scrollYProgress, tagStart, tagEnd }: { tag: string, scrollYProgress: any, tagStart: number, tagEnd: number }) => {
+  const opacity = useTransform(scrollYProgress, [tagStart, tagEnd], [0.2, 1]);
+  const scale = useTransform(scrollYProgress, [tagStart, tagEnd], [1, 1.05]);
+  const color = useTransform(scrollYProgress, [tagStart, tagEnd], ["rgba(255,255,255,0.2)", "rgba(255,255,255,1)"]);
+  const textShadow = useTransform(
+    scrollYProgress, 
+    [tagStart, tagEnd], 
+    ["0px 0px 0px rgba(255,255,255,0)", "0px 0px 24px rgba(255,255,255,0.8)"]
+  );
+
+  return (
+    <motion.span 
+      style={{ opacity, scale, color, textShadow }}
+      className="text-xl md:text-3xl lg:text-4xl font-display font-light whitespace-nowrap"
+    >
+      {tag}
+    </motion.span>
+  );
+};
+
+const CategorySegment = ({ skill, index, total, scrollYProgress }: { skill: any, index: number, total: number, scrollYProgress: any }) => {
+  const windowStart = index / total;
+  const windowEnd = (index + 1) / total;
+  const windowLength = windowEnd - windowStart;
+
+  // Category Fade logic
+  const fadeStart = windowStart;
+  const fadeInEnd = windowStart + windowLength * 0.1;
+  const fadeOutStart = windowEnd - windowLength * 0.1;
+  const fadeEnd = windowEnd;
+
+  const opacity = useTransform(
+    scrollYProgress,
+    [fadeStart, fadeInEnd, fadeOutStart, fadeEnd],
+    [0, 1, 1, 0]
+  );
+  
+  const y = useTransform(
+    scrollYProgress,
+    [fadeStart, fadeInEnd, fadeOutStart, fadeEnd],
+    ["30px", "0px", "0px", "-30px"]
+  );
+
+  // Tag Highlight logic
+  const highlightStart = windowStart + windowLength * 0.15;
+  const highlightEnd = windowEnd - windowLength * 0.15;
+  const highlightLength = highlightEnd - highlightStart;
+
+  return (
+    <motion.div 
+      style={{ opacity, y }} 
+      className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center pointer-events-none"
+    >
+      <h3 className="text-5xl md:text-6xl lg:text-8xl font-display font-medium tracking-tight text-white mb-10 md:mb-16">
+        {skill.name}
+      </h3>
+      
+      <div className="flex flex-wrap justify-center gap-x-6 md:gap-x-12 gap-y-6 max-w-5xl items-center pb-20">
+        {skill.tags.map((tag: string, j: number) => {
+          const K = skill.tags.length;
+          const tagStart = highlightStart + (j / K) * highlightLength;
+          // Extend end range so they stay illuminated
+          const tagEnd = highlightStart + ((j + 1) / K) * highlightLength;
+
+          return (
+            <HighlightTag 
+              key={tag} 
+              tag={tag} 
+              scrollYProgress={scrollYProgress} 
+              tagStart={tagStart} 
+              tagEnd={tagEnd} 
+            />
+          );
+        })}
+      </div>
+    </motion.div>
+  );
+};
+
+const TechStackSection = () => {
+  const targetRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: targetRef,
+    offset: ["start start", "end end"],
+  });
+
+  return (
+    <section ref={targetRef} id="skills" className="relative h-[600vh] z-10 w-full mb-32">
+      <div className="sticky top-0 h-screen w-full flex flex-col justify-center overflow-hidden">
+        {skills.map((skill, index) => (
+          <CategorySegment 
+            key={skill.name} 
+            skill={skill} 
+            index={index} 
+            total={skills.length} 
+            scrollYProgress={scrollYProgress} 
+          />
+        ))}
+      </div>
+    </section>
+  );
+};
 
 /* ============================
    ABOUT / MISSION SECTION
@@ -506,12 +675,12 @@ const CTASection = () => {
 
     emailjs.sendForm(serviceId, templateId, form, publicKey)
       .then(() => {
-          setBtnText("Sent Successfully! ✅");
+          setBtnText("Sent Successfully!");
           form.reset();
           setTimeout(() => setBtnText("Send Message"), 4000);
       }, (error) => {
           console.error(error.text);
-          setBtnText("Error Sending ❌");
+          setBtnText("Error Sending");
           setTimeout(() => setBtnText("Send Message"), 4000);
       });
   };
@@ -587,7 +756,7 @@ export default function App() {
       </AnimatePresence>
 
       <div 
-        className="min-h-screen font-sans overflow-x-hidden w-full"
+        className="min-h-screen font-sans w-full"
         style={{ opacity: isLoading ? 0 : 1, transition: "opacity 0.5s ease-out" }}
       >
         {/* 3D Galaxy Canvas — lazy loaded to unblock main thread */}
@@ -610,6 +779,7 @@ export default function App() {
           <CTASection />
         </main>
         <Footer />
+        <Chatbot />
       </div>
     </>
   );
